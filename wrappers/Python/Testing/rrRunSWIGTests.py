@@ -30,31 +30,37 @@ class TestRoadRunnerFunctions(unittest.TestCase):
         #self.r.load('simple_test_model.xml')
         #r.setConservationLaw(false) #TODO if needed
         # initialization sets this to false - no equivalent in swigapi?
+      
+    def test_Fluxes(self):
+        line={'J1': 0.0715152565880721,
+              'J2': 0.0715152565880721,
+              'J3': 0.0715152565880721,
+              'J4': 0.0715152565880721}
+	expected = line
+	actual = {}
+        for id in expected:
+	    actual[id] = self.r.model[id] #reaction fluxes
+
+        for id in actual:
+	    self.assertAlmostEqual(expected[id], actual[id], delta=1E-6)
+            #if expectApproximately (expectedValue, fluxes[i][2], 1E-6) == False:
+            #    errorFlag = True
+            #    break
+            #print passMsg (errorFlag)
         
-    @unittest.skip("test_SpeciesConcentrations expectappx")
-    def test_SpeciesConcentrations(testId):
-        line="S1 0.569694868238558\
-        S2 0.208044382801664\
-        S3 0.13002773925104"
-        words = []
-        species = []
-        m = rrPython.getNumberOfFloatingSpecies()
-        for i in range (0,m):
-            line = readLine ()
-            words = line.split()
-            words.append (rrPython.getValue(words[0]))
-            species.append (words)
+    def test_SpeciesConcentrations(self):
+        line={'S1': 0.569694868238558,
+              'S2': 0.208044382801664,
+              'S3': 0.13002773925104}
 
+	expected = line
+	actual = {}
+	for k in self.r.model.getFloatingSpeciesIds():
+	    actual[k] = self.r.model[k]
+	
         # Steady State Concentrations
-        print string.ljust ("Check " + testId, rpadding),
-        errorFlag = False
-        for i in range (0,m):
-            expectedValue =  float (species[i][1])
-            if expectApproximately (expectedValue, species[i][2], 1E-6) == False:
-                errorFlag = True
-                break
-        print passMsg (errorFlag)
-
+        for id in actual:
+	    self.assertAlmostEqual(expected[id], actual[id], delta=1E-6)
     
     def test_myComputeSteadyState(self):
         print "test_myComputeSteadyState"
