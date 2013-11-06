@@ -31,18 +31,48 @@ class TestRoadRunnerFunctions(unittest.TestCase):
         #r.setConservationLaw(false) #TODO if needed
         # initialization sets this to false - no equivalent in swigapi?
         
+    @unittest.skip("test_SpeciesConcentrations expectappx")
+    def test_SpeciesConcentrations(testId):
+        line="S1 0.569694868238558\
+        S2 0.208044382801664\
+        S3 0.13002773925104"
+        words = []
+        species = []
+        m = rrPython.getNumberOfFloatingSpecies()
+        for i in range (0,m):
+            line = readLine ()
+            words = line.split()
+            words.append (rrPython.getValue(words[0]))
+            species.append (words)
+
+        # Steady State Concentrations
+        print string.ljust ("Check " + testId, rpadding),
+        errorFlag = False
+        for i in range (0,m):
+            expectedValue =  float (species[i][1])
+            if expectApproximately (expectedValue, species[i][2], 1E-6) == False:
+                errorFlag = True
+                break
+        print passMsg (errorFlag)
+
+    
+    def test_myComputeSteadyState(self):
+        print "test_myComputeSteadyState"
+        print "Compute Steady State, distance to SteadyState: " + str(self.r.steadyState())
+        self.assertTrue(True)
+        
     def test_SetSteadyStateSelectionList(self):
         print "test_SetSteadyStateSelectionList"
         line ="S1 S2 S3"
-	actual = self.r.steadyStateSelections = line.split()
-	self.assertTrue(actual)
+        actual = self.r.steadyStateSelections = line.split()
+        self.assertTrue(actual)
 
     def test_ReactionIds(self):
         print "test_ReactionIds"
         line = "J1 J2 J3 J4"
         expected = line.split()
         actual = self.r.model.getReactionIds()
-	self.assertItemsEqual(expected, actual)
+        self.assertItemsEqual(expected, actual)
     
     def test_load(self):
         print "test_load"
