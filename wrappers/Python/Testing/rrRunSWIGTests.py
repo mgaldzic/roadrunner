@@ -43,10 +43,6 @@ class TestRoadRunnerFunctions(unittest.TestCase):
 
         for id in actual:
 	    self.assertAlmostEqual(expected[id], actual[id], delta=1E-6)
-            #if expectApproximately (expectedValue, fluxes[i][2], 1E-6) == False:
-            #    errorFlag = True
-            #    break
-            #print passMsg (errorFlag)
         
     def test_SpeciesConcentrations(self):
         line={'S1': 0.569694868238558,
