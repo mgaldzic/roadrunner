@@ -35,6 +35,8 @@ Contents:
 
 .. toctree::
 
+   doctest
+   doctest_whatis
    introduction
    read_write_functions
    selecting_values

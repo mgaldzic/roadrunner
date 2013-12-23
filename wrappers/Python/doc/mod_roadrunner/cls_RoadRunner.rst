@@ -416,20 +416,20 @@
 
    Some examples of loading files on Mac or Linux::
    
-       >>> r.load("myfile.xml")                               # load a file from the current dirctory
-       >>> r.load("/Users/Fred/myfile.xml")                   # absolute path
-       >>> r.load("http://sbml.org/example_system.xml")       # remote file
+       >>> rr.load("myfile.xml")                               # load a file from the current dirctory # doctest: +SKIP
+       >>> rr.load("/Users/Fred/myfile.xml")                   # absolute path                         # doctest: +SKIP
+       >>> rr.load("http://sbml.org/example_system.xml")       # remote file                           # doctest: +SKIP
 
 
    Or on Windows:
 
-       >>> r.load("myfile.xml")                                  # load a file from the current dirctory
-       >>> r.load("file://localhost/c:/Users/Fred/myfile.xml")   # using a uri
+       >>> rr.load("myfile.xml")                                  # load a file from the current dirctory # doctest: +SKIP
+       >>> rr.load("file://localhost/c:/Users/Fred/myfile.xml")   # using a uri                           # doctest: +SKIP
 
    One may also load the contents of a document::
-       >>> myfile = open("myfile.xml, "r")
-       >>> contents = file.read()
-       >>> r.load(contents)
+       >>> myfile = open("myfile.xml, "r")                                                             # doctest: +SKIP
+       >>> contents = file.read()                                                                      # doctest: +SKIP
+       >>> rr.load(contents)                                                                           # doctest: +SKIP
 
    In future version, we will also support loading directly from a libSBML Dcoument object. 
 

@@ -33,6 +33,7 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.pngmath',
     'sphinx.ext.todo',
+    'sphinx.ext.doctest',
     'sphinx.ext.autosummary'
 ]
 
